@@ -1,0 +1,17 @@
+.post-container {
+    position: relative;
+}
+
+.scroll-tracker {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 999;
+    height: .2rem;
+    background-color: limegreen;
+    transform-origin: left;
+}
+
+.blank-screen {
+    height: 100vh;
+    width: auto;
+}

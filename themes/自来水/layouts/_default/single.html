@@ -1,0 +1,47 @@
+{{ define "main" }}
+<article class="post-container">
+    <h1>{{ .Title }}</h1>
+
+    <div clsss="meta">
+        <span class="date">
+            {{ .Date.Format "2006-02-01" }}
+        </span>
+
+        <ul class="tag">
+            {{ range (.GetTerms "tags") }}
+            <li>
+                <a href="{{ .Permalink }}">
+                    {{ .LinkTitle }}
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+
+    <div class="content">
+        {{ .Content }}
+    </div>
+
+    <hr />
+
+    <script> pangu.spacingPage(); </script>
+
+    <div class="pagination">
+        {{ with .Prev }}
+        <span class="prev">
+            <a href="{{ .RelPermalink }}">
+                上一篇：{{ .Title }}
+            </a>
+        </span>
+        {{ end }}
+        {{ with .Next }}
+        <span class="next">
+            <a href="{{ .RelPermalink }}">
+                下一篇：{{ .Title }}
+            </a>
+        </span>
+        {{ end }}
+    </div>
+
+</article>
+{{ end }}

@@ -1,0 +1,58 @@
+{{ define "main" }}
+{{ if eq (len .Pages) 0 }}
+<h2>No post found</h2>
+{{ end }}
+
+<ul class="post-list">
+    {{ $paginator := .Paginate .Pages -}}
+
+    {{ range $post := $paginator.Pages }}
+    <li class="post-item">
+        <h2>
+            <a href="{{ $post.RelPermalink }}">{{ $post.Title }}</a>
+        </h2>
+
+        <div clsss="post-meta">
+            <span class="date">
+                {{ $post.Date.Format "2006-1-02" }}
+            </span>
+
+            <ul class="post-tag">
+                {{ range (.GetTerms "tags") }}
+                <li>
+                    <a href="{{ .Permalink }}">
+                        {{ .LinkTitle }}
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+
+        <div class="post-summary">
+            {{ $post.Summary | truncate 50 }}
+        </div>
+
+        <a href="{{ $post.RelPermalink }}" class="post-read">Read More</a>
+    </li>
+    {{ end }}
+</ul>
+
+<script> pangu.spacingPage(); </script>
+
+<div class="pagination">
+    {{ with .Paginator.Prev }}
+    <span class="prev">
+        <a href="{{ .URL }}" class="prev">
+            前一页
+        </a>
+    </span>
+    {{ end }}
+    {{ with .Paginator.Next }}
+    <span class="next">
+        <a href="{{ .URL }}" class="next">
+            后一页
+        </a>
+    </span>
+    {{ end }}
+</div>
+{{ end }}
